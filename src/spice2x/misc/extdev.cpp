@@ -73,8 +73,10 @@ static bool GFDM_GF_PICK_STATE_DOWN[2]{};
 static HINSTANCE EXTDEV_INSTANCE;
 static std::string EXTDEV_INSTANCE_NAMES[] = {
                 "ext_dev.dll",
+                "libextio.dll",
                 "libcardunit.dll",
                 "libledunit.dll",
+                "libgfdm_unit2.dll",
                 "libshare-pj.dll",
 };
 
@@ -1335,6 +1337,7 @@ void extdev_attach() {
                                   "?led_unit_update@@YAXXZ"}));
 
         // SCI
+        if (!LAUNCHER_OPTIONS || !LAUNCHER_OPTIONS->at(launcher::Options::GFDMRealUNIT).value_bool()) {
         detour::inline_hook((void *) sci_boot, libutils::try_proc(
                 EXTDEV_INSTANCE, "sci_boot"));
         detour::inline_hook((void *) sci_clear_error, libutils::try_proc(
@@ -1357,6 +1360,7 @@ void extdev_attach() {
                 EXTDEV_INSTANCE, "sci_set_linebreak"));
         detour::inline_hook((void *) sci_setparam, libutils::try_proc(
                 EXTDEV_INSTANCE, "sci_setparam"));
+        }
 
         // libshare-pj.dll - dm_output
         detour::inline_hook((void *) dm_output_set_padled, libutils::try_proc(
