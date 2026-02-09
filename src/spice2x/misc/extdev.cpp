@@ -1175,7 +1175,7 @@ void extdev_attach() {
         detour::inline_hook((void *) cardunit_sleep, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"cardunit_sleep", "?cardunit_sleep@@YAXH@Z"}));
 
-        // GFDM UNIT
+/*         // GFDM UNIT
         detour::inline_hook((void *) gfdm_unit_boot, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"gfdm_unit_boot",
                                   "?gfdm_unit_boot@@YAXW4UNIT_TYPE@@HH@Z"}));
@@ -1290,7 +1290,7 @@ void extdev_attach() {
         detour::inline_hook((void *) gfdm_unit2_update, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"gfdm_unit2_update",
                                   "?gfdm_unit2_update@@YAXXZ"}));
-
+ */
         // led unit
         detour::inline_hook((void *) led_get_version, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"led_get_version",
