@@ -73,7 +73,6 @@ static bool GFDM_GF_PICK_STATE_DOWN[2]{};
 static HINSTANCE EXTDEV_INSTANCE;
 static std::string EXTDEV_INSTANCE_NAMES[] = {
                 "ext_dev.dll",
-                "libextio.dll",
                 "libcardunit.dll",
                 "libledunit.dll",
                 "libshare-pj.dll",
