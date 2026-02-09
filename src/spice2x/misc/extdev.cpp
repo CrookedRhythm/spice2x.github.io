@@ -76,7 +76,6 @@ static std::string EXTDEV_INSTANCE_NAMES[] = {
                 "libextio.dll",
                 "libcardunit.dll",
                 "libledunit.dll",
-                "libgfdm_unit2.dll",
                 "libshare-pj.dll",
 };
 
