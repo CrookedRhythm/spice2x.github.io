@@ -694,6 +694,8 @@ void spicedevice_attach() {
             DEVICE_INSTANCE, {"device_update", "?device_update@@YAXXZ"}));
     detour::inline_hook((void *) device_update_secplug, libutils::try_proc_list(
             DEVICE_INSTANCE, {"device_update_secplug", "?device_update_secplug@@YAXXZ"}));
+
+    if (!LAUNCHER_OPTIONS || !LAUNCHER_OPTIONS->at(launcher::Options::GFDMRealUNIT).value_bool()) {
     detour::inline_hook((void *) devsci_break, libutils::try_proc_list(
             DEVICE_INSTANCE, {"devsci_break", "?devsci_break@@YAXHH@Z"}));
     detour::inline_hook((void *) devsci_open, libutils::try_proc_list(
@@ -702,6 +704,7 @@ void spicedevice_attach() {
             DEVICE_INSTANCE, {"devsci_read", "?devsci_read@@YAHHPEAEH@Z"}));
     detour::inline_hook((void *) devsci_write, libutils::try_proc_list(
             DEVICE_INSTANCE, {"devsci_write", "?devsci_write@@YAHHPEBEH@Z"}));
+    }
 
     detour::inline_hook((void *) p4io_sci_boot, libutils::try_proc_list(
             DEVICE_INSTANCE, {"p4io_sci_boot"}));
