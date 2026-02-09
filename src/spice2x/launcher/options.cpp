@@ -1458,9 +1458,9 @@ static const std::vector<OptionDefinition> OPTION_DEFINITIONS = {
         .category = "I/O Modules",
     },
     {
-        .title = "Disable EXTDEV Module",
-        .name = "noextdev",
-        .desc = "Manually disable EXTDEV emulation.",
+        .title = "Use Real GFDM UNIT Devices",
+        .name = "gfdmreal",
+        .desc = "Use real GFDM Guitar or Drum IO devices along with EXTDEV emulation. Only enable this if you have the actual hardware connected, otherwise it may cause issues.",
         .type = OptionType::Bool,
         .category = "I/O Modules",
     },

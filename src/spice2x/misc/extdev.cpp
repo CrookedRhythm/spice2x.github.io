@@ -15,6 +15,8 @@
 #include "games/gitadora/gitadora.h"
 #include "games/gitadora/io.h"
 #include "avs/game.h"
+#include "launcher/launcher.h"
+#include "launcher/options.h"
 
 using namespace GameAPI;
 
@@ -1175,122 +1177,126 @@ void extdev_attach() {
         detour::inline_hook((void *) cardunit_sleep, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"cardunit_sleep", "?cardunit_sleep@@YAXH@Z"}));
 
-/*         // GFDM UNIT
+         // GFDM UNIT
+        if (!LAUNCHER_OPTIONS || !LAUNCHER_OPTIONS->at(launcher::Options::GFDMRealUNIT).value_bool()) {
         detour::inline_hook((void *) gfdm_unit_boot, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_boot",
-                                  "?gfdm_unit_boot@@YAXW4UNIT_TYPE@@HH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_boot",
+                      "?gfdm_unit_boot@@YAXW4UNIT_TYPE@@HH@Z"}));
         detour::inline_hook((void *) gfdm_unit_boot_initialize, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_boot_initialize",
-                                  "?gfdm_unit_boot_initialize@@YAHXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_boot_initialize",
+                      "?gfdm_unit_boot_initialize@@YAHXZ"}));
         detour::inline_hook((void *) gfdm_unit_get_button, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_button",
-                                  "?gfdm_unit_get_button@@YA?AUunit_button_t@@H@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_button",
+                      "?gfdm_unit_get_button@@YA?AUunit_button_t@@H@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_button_dm, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_button_dm",
-                                  "?gfdm_unit_get_button_dm@@YAHW4DM_BUTTON_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_button_dm",
+                      "?gfdm_unit_get_button_dm@@YAHW4DM_BUTTON_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_button_gf, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_button_gf",
-                                  "?gfdm_unit_get_button_gf@@YAHW4UNIT_NO@@W4GF_BUTTON_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_button_gf",
+                      "?gfdm_unit_get_button_gf@@YAHW4UNIT_NO@@W4GF_BUTTON_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_dm_attack_border_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_dm_attack_border_value",
-                                  "?gfdm_unit_get_dm_attack_border_value@@YAHHPEAH@Z",
-                                  "?gfdm_unit_get_dm_attack_border_value@@YAHHPAH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_dm_attack_border_value",
+                      "?gfdm_unit_get_dm_attack_border_value@@YAHHPEAH@Z",
+                      "?gfdm_unit_get_dm_attack_border_value@@YAHHPAH@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_errorcount",
-                                  "?gfdm_unit_get_errorcount@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_errorcount",
+                      "?gfdm_unit_get_errorcount@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_input, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_input",
-                                  "?gfdm_unit_get_input@@YAIH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_input",
+                      "?gfdm_unit_get_input@@YAIH@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_sensor_gf, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_sensor_gf",
-                                  "?gfdm_unit_get_sensor_gf@@YAHW4UNIT_NO@@W4GF_SENSOR_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_sensor_gf",
+                      "?gfdm_unit_get_sensor_gf@@YAHW4UNIT_NO@@W4GF_SENSOR_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_status, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_status",
-                                  "?gfdm_unit_get_status@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_status",
+                      "?gfdm_unit_get_status@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_stream_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_stream_errorcount",
-                                  "?gfdm_unit_get_stream_errorcount@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_stream_errorcount",
+                      "?gfdm_unit_get_stream_errorcount@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit_get_version, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_get_version",
-                                  "?gfdm_unit_get_version@@YAPEBUfirm_version@@H@Z",
-                                  "?gfdm_unit_get_version@@YAPBUfirm_version@@H@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_get_version",
+                      "?gfdm_unit_get_version@@YAPEBUfirm_version@@H@Z",
+                      "?gfdm_unit_get_version@@YAPBUfirm_version@@H@Z"}));
         detour::inline_hook((void *) gfdm_unit_reset, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_reset",
-                                  "?gfdm_unit_reset@@YAHXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_reset",
+                      "?gfdm_unit_reset@@YAHXZ"}));
         detour::inline_hook((void *) gfdm_unit_reset_stream_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_reset_stream_errorcount",
-                                  "?gfdm_unit_reset_stream_errorcount@@YAXH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_reset_stream_errorcount",
+                      "?gfdm_unit_reset_stream_errorcount@@YAXH@Z"}));
         detour::inline_hook((void *) gfdm_unit_send_motor_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_send_motor_value",
-                                  "?gfdm_unit_send_motor_value@@YAIHE@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_send_motor_value",
+                      "?gfdm_unit_send_motor_value@@YAIHE@Z"}));
         detour::inline_hook((void *) gfdm_unit_set_dm_attack_border_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_set_dm_attack_border_value",
-                                  "?gfdm_unit_set_dm_attack_border_value@@YAXQEAH@Z",
-                                  "?gfdm_unit_set_dm_attack_border_value@@YAXQAH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_set_dm_attack_border_value",
+                      "?gfdm_unit_set_dm_attack_border_value@@YAXQEAH@Z",
+                      "?gfdm_unit_set_dm_attack_border_value@@YAXQAH@Z"}));
         detour::inline_hook((void *) gfdm_unit_shutdown, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_shutdown",
-                                  "?gfdm_unit_shutdown@@YAXXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_shutdown",
+                      "?gfdm_unit_shutdown@@YAXXZ"}));
         detour::inline_hook((void *) gfdm_unit_update, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit_update",
-                                  "?gfdm_unit_update@@YAXXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit_update",
+                      "?gfdm_unit_update@@YAXXZ"}));
+        } // end if !GFDMRealUNIT
 
         // GFDM UNIT 2
+        if (!LAUNCHER_OPTIONS || !LAUNCHER_OPTIONS->at(launcher::Options::GFDMRealUNIT).value_bool()) {
         detour::inline_hook((void *) gfdm_unit2_boot, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_boot",
-                                  "?gfdm_unit2_boot@@YAXW4UNIT_TYPE@@HH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_boot",
+                      "?gfdm_unit2_boot@@YAXW4UNIT_TYPE@@HH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_boot_initialize, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_boot_initialize",
-                                  "?gfdm_unit2_boot_initialize@@YAHXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_boot_initialize",
+                      "?gfdm_unit2_boot_initialize@@YAHXZ"}));
         detour::inline_hook((void *) gfdm_unit2_get_button, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_button",
-                                  "?gfdm_unit2_get_button@@YA?AUunit_button_t@@H@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_button",
+                      "?gfdm_unit2_get_button@@YA?AUunit_button_t@@H@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_button_dm, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_button_dm",
-                                  "?gfdm_unit2_get_button_dm@@YAHW4DM_BUTTON_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_button_dm",
+                      "?gfdm_unit2_get_button_dm@@YAHW4DM_BUTTON_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_button_gf, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_button_gf",
-                                  "?gfdm_unit2_get_button_gf@@YAHW4UNIT_NO@@W4GF_BUTTON_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_button_gf",
+                      "?gfdm_unit2_get_button_gf@@YAHW4UNIT_NO@@W4GF_BUTTON_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_dm_attack_border_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_dm_attack_border_value",
-                                  "?gfdm_unit2_get_dm_attack_border_value@@YAHHPEAH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_dm_attack_border_value",
+                      "?gfdm_unit2_get_dm_attack_border_value@@YAHHPEAH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_errorcount",
-                                  "?gfdm_unit2_get_errorcount@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_errorcount",
+                      "?gfdm_unit2_get_errorcount@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_input, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_input",
-                                  "?gfdm_unit2_get_input@@YAIH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_input",
+                      "?gfdm_unit2_get_input@@YAIH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_sensor_gf, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_sensor_gf",
-                                  "?gfdm_unit2_get_sensor_gf@@YAHW4UNIT_NO@@W4GF_SENSOR_DEFINITION@@@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_sensor_gf",
+                      "?gfdm_unit2_get_sensor_gf@@YAHW4UNIT_NO@@W4GF_SENSOR_DEFINITION@@@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_status, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_status",
-                                  "?gfdm_unit2_get_status@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_status",
+                      "?gfdm_unit2_get_status@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_stream_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_stream_errorcount",
-                                  "?gfdm_unit2_get_stream_errorcount@@YAHH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_stream_errorcount",
+                      "?gfdm_unit2_get_stream_errorcount@@YAHH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_get_version, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_get_version",
-                                  "?gfdm_unit2_get_version@@YAPEBUfirm_version@@H@Z",
-                                  "?gfdm_unit2_get_version@@YAPBUfirm_version@@H@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_get_version",
+                      "?gfdm_unit2_get_version@@YAPEBUfirm_version@@H@Z",
+                      "?gfdm_unit2_get_version@@YAPBUfirm_version@@H@Z"}));
         detour::inline_hook((void *) gfdm_unit2_reset, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_reset",
-                                  "?gfdm_unit2_reset@@YAHXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_reset",
+                      "?gfdm_unit2_reset@@YAHXZ"}));
         detour::inline_hook((void *) gfdm_unit2_reset_stream_errorcount, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_reset_stream_errorcount",
-                                  "?gfdm_unit2_reset_stream_errorcount@@YAXH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_reset_stream_errorcount",
+                      "?gfdm_unit2_reset_stream_errorcount@@YAXH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_send_motor_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_send_motor_value",
-                                  "?gfdm_unit2_send_motor_value@@YAIHE@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_send_motor_value",
+                      "?gfdm_unit2_send_motor_value@@YAIHE@Z"}));
         detour::inline_hook((void *) gfdm_unit2_set_dm_attack_border_value, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_set_dm_attack_border_value",
-                                  "?gfdm_unit2_set_dm_attack_border_value@@YAXQEAH@Z"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_set_dm_attack_border_value",
+                      "?gfdm_unit2_set_dm_attack_border_value@@YAXQEAH@Z"}));
         detour::inline_hook((void *) gfdm_unit2_shutdown, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_shutdown",
-                                  "?gfdm_unit2_shutdown@@YAXXZ"}));
+            EXTDEV_INSTANCE, {"gfdm_unit2_shutdown",
+                      "?gfdm_unit2_shutdown@@YAXXZ"}));
         detour::inline_hook((void *) gfdm_unit2_update, libutils::try_proc_list(
-                EXTDEV_INSTANCE, {"gfdm_unit2_update",
-                                  "?gfdm_unit2_update@@YAXXZ"}));
- */
+            EXTDEV_INSTANCE, {"gfdm_unit2_update",
+                      "?gfdm_unit2_update@@YAXXZ"}));
+        } // end if !GFDMRealUNIT
+
         // led unit
         detour::inline_hook((void *) led_get_version, libutils::try_proc_list(
                 EXTDEV_INSTANCE, {"led_get_version",

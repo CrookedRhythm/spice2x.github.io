@@ -197,7 +197,6 @@ int main_implementation(int argc, char *argv[]) {
     bool attach_icca = false;
     bool attach_device = false;
     bool attach_extdev = false;
-    bool disable_extdev = false;
     bool attach_ami2000 = false;
     bool attach_sciunit = false;
     bool attach_cpusbxpkm_printer = false;
@@ -435,9 +434,6 @@ int main_implementation(int argc, char *argv[]) {
     }
     if (options[launcher::Options::EnableEXTDEVModule].value_bool()) {
         attach_extdev = true;
-    }
-    if (options[launcher::Options::DisableEXTDEVModule].value_bool()) {
-        disable_extdev = true;
     }
     if (options[launcher::Options::EnableAMI2000Module].value_bool()) {
         attach_ami2000 = true;
@@ -2262,9 +2258,7 @@ int main_implementation(int argc, char *argv[]) {
 
     // ext dev attach
     if (attach_io || attach_extdev) {
-        if (!disable_extdev) {
-            extdev_attach();
-        }
+        extdev_attach();
     }
 
     // ami 2000 card reader attach
@@ -2410,9 +2404,7 @@ int main_implementation(int argc, char *argv[]) {
 
     // ext dev detach
     if (attach_io || attach_extdev) {
-        if (!disable_extdev) {
-            extdev_detach();
-        }
+        extdev_detach();
     }
 
     // device detach
