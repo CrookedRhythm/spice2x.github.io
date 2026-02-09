@@ -13,6 +13,8 @@
 #include "util/logging.h"
 #include "util/utils.h"
 #include "rawinput/rawinput.h"
+#include "launcher/launcher.h"
+#include "launcher/options.h"
 
 #include "eamuse.h"
 
