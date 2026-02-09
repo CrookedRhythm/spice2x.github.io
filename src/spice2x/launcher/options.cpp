@@ -1458,6 +1458,13 @@ static const std::vector<OptionDefinition> OPTION_DEFINITIONS = {
         .category = "I/O Modules",
     },
     {
+        .title = "Disable EXTDEV Module",
+        .name = "noextdev",
+        .desc = "Manually disable EXTDEV emulation.",
+        .type = OptionType::Bool,
+        .category = "I/O Modules",
+    }
+    {
         .title = "Enable AMI2000 Module",
         .name = "ami2000",
         .desc = "Manually enable AMI2000 emulation.",
